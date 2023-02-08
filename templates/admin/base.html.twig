@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{% block stylesheets %}
+
+			<link href="{{asset('adminkit/css/app.css')}}" rel="stylesheet">
+			<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+			<style>
+
+				/* Style the list */
+				ul.breadcrumb {
+					padding: 10px 16px;
+					list-style: none;
+					background-color: #eee;
+				}
+
+				/* Display list items side by side */
+				ul.breadcrumb li {
+					display: inline;
+					font-size: 18px;
+				}
+
+				/* Add a slash symbol (/) before/behind each list item */
+				ul.breadcrumb li+li:before {
+					padding: 8px;
+					color: black;
+					content: "/\00a0";
+				}
+
+				/* Add a color to all links inside the list */
+				ul.breadcrumb li a {
+					color: #0275d8;
+					text-decoration: none;
+				}
+
+				/* Add a color on mouse-over */
+				ul.breadcrumb li a:hover {
+					color: #01447e;
+					text-decoration: underline;
+				}
+			</style>
+		</head>
+	{% endblock %}
+	<body>
+
+		<div class="wrapper">
+			{% include "admin/parts/_sidebar.html.twig" %}
+
+			<div class="main">
+				{% include "admin/parts/_navbar.html.twig" %}
+
+
+				<main class="content">
+					<div class="container-fluid p-0"> {% block body %}{% endblock %}
+
+
+						</div>
+					</main>
+
+					{% include "admin/parts/_footer.html.twig" %}
+
+				</div>
+			</div>
+			{% block javascripts %}
+				<script src="{{asset('adminkit/js/app.js')}}"></script>
+
+			{% endblock %}
+		</body>
+	</html>

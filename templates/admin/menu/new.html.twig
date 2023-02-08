@@ -1,0 +1,23 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Nouveau Menu
+{% endblock %}
+
+{% block body %}
+
+	<ul class="breadcrumb">
+		<li>
+			<a href="{{ path('app_menu_index') }}">Gestion des menu</a>
+		</li>
+		<li>Nouveau menu</li>
+	</ul>
+
+	<div class="card">
+
+		<div class="card-body">
+			<h4 class="card-title">Créer un nouveau menu</h4>
+			{{ include('admin/menu/_form.html.twig') }}
+		</div>
+	</div>
+
+{% endblock %}
