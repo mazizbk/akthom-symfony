@@ -1,0 +1,49 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+
+
+.header-bg-akt {
+    background-color: rgb(113, 176, 147);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: black;
+    background-color: rgb(230, 230, 230);
+}
+
+.btn-aktehom-blue {
+    color: #fff;
+    background-color: #3898EC;
+    border-color: #3898EC;
+    
+}
+
+.btn-aktehom-blue:hover{
+        color: #fff;
+    background-color: #3898EC;
+        border-color: #3898EC;
+}
+
+.column-div-source {
+    position: relative;
+    overflow: hidden;
+}
+
+.column-div-source::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 53%;
+    left: 85%;
+    width: 30%;
+    height: 2px;
+    background: repeating-linear-gradient(to right, gray, gray 2px, transparent 3px, transparent 6px);
+    clear: both;
+}
+
+.column-div-source:last -child {
+    background: none;
+}

@@ -1,17 +1,19 @@
 <header>
-	<div class="px-3 py-1 header-bg-akt">
+	<div class="col-12 px-3 py-1 header-bg-akt">
 		<div class="container">
 			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
 
 				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small ">
 					<li>
 						<a href="#" class="nav-link text-white">
-							FR
+							🇫🇷
+
 						</a>
 					</li>
 					<li>
 						<a href="#" class="nav-link text-white">
-							EN
+							🇬🇧
+
 						</a>
 					</li>
 
@@ -19,44 +21,46 @@
 			</div>
 		</div>
 	</div>
-	<div class="px-3 py-2 border-bottom mb-3">
-		<div class="container d-flex flex-wrap justify-content-center">
-			<a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-decoration-none">
-				<img src="{{ asset('images/logo.png') }}">
-			</a>
+	<div class="container">
 
-			<ul class="nav nav-pills nav-fill col-12 col-lg-auto my-2 justify-content-centermy-2 my-lg-0 me-lg-auto text-small">
-
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">Accueil</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Les domaines</a>
-				</li>
+		<div class="row">
+			<div class="col-10 px-5 py-2 mb-3">
 
 
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						Le moteur de recherche
-					</a>
-				</li>
+				<nav class="navbar navbar-padding-y-4 nav-pills navbar-expand-lg">
 
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						Le prix
-					</a>
-				</li>
 
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						Notre expetise
-					</a>
-				</li>
+					<div class="container-fluid">
+						<a class="navbar-brand px-5" href="/accueil">
+							<img src="{{ asset('images/logo.png') }}">
 
-			</ul>
-			<div class="text-end">
-				<button type="button" class="btn btn-sm text-white" style="background-color:#3898EC">Inscription</button>
+						</a>
+						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse px-5" id="navbarTogglerDemo02" style="padding-left: 10%;">
+							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+								{{ render_menu() }}
+
+
+							</ul>
+
+						</div>
+					</div>
+				</nav>
+
+
 			</div>
+			<div class="col-2 px-5 py-2 mt-4">
+
+				<button type="button" class="btn btn-aktehom-blue btn-sm">Inscription</button>
+
+
+			</div>
+
 		</div>
+
 	</div>
+
+
 </header>

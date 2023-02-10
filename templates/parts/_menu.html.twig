@@ -1,0 +1,17 @@
+{% set active_slug = app.request.attributes.get('_route_params').slug|default('') %}
+
+
+{% for item in menu_items %}
+	<li class="nav-item">
+
+		{% if(active_slug)%}
+
+			<a href="{{ path('app_front_page', {'slug': item.getPageId().slug}) }}" class="nav-link{{ item.getPageId().slug == active_slug ? ' active' : '' }}">{{ item.label }}</a>
+
+			{%else%}
+			<a href="{{ path('app_front_page', {'slug': item.getPageId().slug}) }}" class="nav-link">{{ item.label }}</a>
+
+
+			{%endif%}
+		</li>
+	{% endfor %}

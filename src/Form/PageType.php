@@ -16,16 +16,16 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class,['label'=>'Titre'])
-            ->add('description', TextareaType::class,['label'=>'Description','attr'=>['rows'=>'10']])
+            ->add('title', TextType::class, ['label'=>'Titre'])
+            ->add('description', TextareaType::class, ['label'=>'Description','attr'=>['rows'=>'10']])
             ->add(
                 'content',
                 CKEditorType::class,
-                [   
+                [
                     'label'=> 'Contenu',
                     'attr' => ['class' => 'editor'],
                     'config' => [
-                        
+
                         'language' => 'fr',
                         'allowedContent'=>true,
                         'extraPlugins' => ['templates','content'],
@@ -46,20 +46,31 @@ class PageType extends AbstractType
                                     'description'         => 'Style bootsrap prix',
                                     'template'            => 'bloc/_part_2.html.twig',
                                 ],
-                                 [
+                                [
                                     'title'               => 'Domaines',
                                     'description'         => 'Style bootsrap domaines',
                                     'template'            => 'bloc/_part_3.html.twig',
                                 ],
+                                [
+                                    'title'               => 'Expertises',
+                                    'description'         => 'Style bootsrap expertises',
+                                    'template'            => 'bloc/_part_4.html.twig',
+                                ],
 
-                                 
+                               
+                                [
+                                    'title'               => 'Le moteur de rercherche',
+                                    'description'         => 'Style bootsrap le moteur de recherche',
+                                    'template'            => 'bloc/_part_5.html.twig',
+                                ]
+
                             ],
                         ],
                     ],
                 ]
             )
-            ->add('status',CheckboxType::class, ['label'=>'Publier le contenu','required'=>false])
-            ->add('is_search_module',CheckboxType::class, ['label'=>'Inclure le module de recherche','required'=>false]);
+            ->add('status', CheckboxType::class, ['label'=>'Publier le contenu','required'=>false])
+            ->add('is_search_module', CheckboxType::class, ['label'=>'Inclure le module de recherche','required'=>false]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
