@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-end">
 
-				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small ">
+				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 					<li>
 						<a href="#" class="nav-link text-white">
 							🇫🇷
@@ -31,32 +31,33 @@
 
 
 					<div class="container-fluid">
-						<a class="navbar-brand px-5" href="/accueil">
+						<a class="navbar-brand px-4" href="/accueil">
 							<img src="{{ asset('images/logo.png') }}">
 
 						</a>
 						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 						</button>
-						<div class="collapse navbar-collapse px-5" id="navbarTogglerDemo02" style="padding-left: 10%;">
+						<div class="collapse navbar-collapse px-5" id="navbarTogglerDemo02">
 							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 								{{ render_menu() }}
+								<li class="nav-item mx-5 mt-0">
+									<a class="btn btn-aktehom-blue btn-md" aria-current="page" href="#">Inscription</a>
+
+								</li>
 
 
 							</ul>
 
 						</div>
+
+
 					</div>
 				</nav>
 
 
 			</div>
-			<div class="col-2 px-5 py-2 mt-4">
 
-				<button type="button" class="btn btn-aktehom-blue btn-sm">Inscription</button>
-
-
-			</div>
 
 		</div>
 

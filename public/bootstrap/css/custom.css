@@ -2,7 +2,21 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+h1 {
+    font-size: 38px;
+    line-height: 44px;
+    margin-top: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Nunito;
+    text-align: center;
+}
 
 .header-bg-akt {
     background-color: rgb(113, 176, 147);
@@ -12,19 +26,20 @@ body {
 .nav-pills .show>.nav-link {
     color: black;
     background-color: rgb(230, 230, 230);
+    border-radius: 2.375rem;
 }
 
 .btn-aktehom-blue {
     color: #fff;
     background-color: #3898EC;
     border-color: #3898EC;
-    
+
 }
 
-.btn-aktehom-blue:hover{
-        color: #fff;
+.btn-aktehom-blue:hover {
+    color: #fff;
     background-color: #3898EC;
-        border-color: #3898EC;
+    border-color: #3898EC;
 }
 
 .column-div-source {
@@ -36,14 +51,14 @@ body {
     content: "";
     display: block;
     position: absolute;
-    bottom: 53%;
-    left: 85%;
-    width: 30%;
-    height: 2px;
-    background: repeating-linear-gradient(to right, gray, gray 2px, transparent 3px, transparent 6px);
+    bottom: 63%;
+    left: 90%;
+    width: 100%;
+    height: 1px;
+    background: gray;
     clear: both;
 }
 
-.column-div-source:last -child {
-    background: none;
+.column-div-source:nth-last-child(1) {
+    background: none !important;
 }
