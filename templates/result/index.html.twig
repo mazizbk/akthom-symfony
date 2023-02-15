@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Result Pdf Search
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="col-12 py-0 text-center container">
+		<div class="row py-lg-5">
+			<div class="col-lg-12 col-md-8 mx-auto">
+				<h1 class="heading">Vos résultats de recherche
+				</h1>
+
+
+				<p class="leadtext-muted text-body-tertiary">Affinez vos recherches</p>
+
+
+			</div>
+		</div>
+	</div>
+
+	<div class="py-5 col-12 bg-light">
+
+
+		<div class="col-lg-6 col-md-8 mx-auto">
+
+
+			<form method="post" action="/result/search">
+
+
+				<input type="text" class="form-control rounded-pill" id="search_string" name="search_string" value="{{ app.request.get('search_string') }}" placeholder="Veuillez taper un mot clé pour votre recherche. Exemple:  'nettoyage'...">
+
+				<div class="text-center container py-3">
+
+					<input type="checkbox" class="btn-check" id="filter-1" checked autocomplete="off">
+					<label class="btn btn-outline-primary" for="filter-1">Filtre 1</label>
+
+					<input type="checkbox" class="btn-check" id="filter-2" checked autocomplete="off">
+					<label class="btn btn-outline-primary" for="filter-2">Filtre 2</label>
+
+					<input type="checkbox" class="btn-check" id="filter-3" checked autocomplete="off">
+					<label class="btn btn-outline-primary" for="filter-3">Filtre 3</label>
+
+					<input type="checkbox" class="btn-check" id="filter-4" checked autocomplete="off">
+					<label class="btn btn-outline-primary" for="filter-4">Filtre 4</label>
+
+					<input type="checkbox" class="btn-check" id="filter-5" checked autocomplete="off">
+					<label class="btn btn-outline-primary" for="filter-5">Filtre 5</label>
+
+
+				</div>
+
+				<div class="text-center container py-4">
+					<button type="submit" class="btn btn-aktehom-blue my-2">Lancer la recherche</button>
+
+
+				</div>
+			</form>
+
+
+		</div>
+
+
+	</div>
+
+	<div class="container py-4">
+
+
+		<div class="row">
+			<center>
+				<h3>{{ res['hits']['total']['value'] }}
+					résultat(s) trouvé(s)
+					<em>"{{ app.request.get('search_string') }}
+
+
+						"
+
+					</em>
+				</h3>
+			</center>
+		</div>
+	</div>
+	<div class="row mx-5">
+
+
+		{% for hit in res['hits']['hits'] %}
+
+
+			<div class="col-lg-6 col-md-12 col-sm-12 py-4 d-flex align-items-stretch">
+				<div class="card">
+
+					<div class="card-body">
+						<h5 class="card-title">{{ hit['meta']['title'] ?? 'undefined title'  }}</h5>
+
+						<p class="card-text" id="{{loop.index}}" name="goodSummary">{{ hit['highlight']['content']|join(' ')| raw}}</p>
+
+
+						<p class="card-text align-items-stretch">
+							<b>
+								Status :</b>
+							to define
+
+						</p>
+
+
+					</div>
+					<div class="card-footer bg-transparent border-light">
+
+
+						<div class="dropdown open">
+							<button class="btn btn-light dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								Dropdown
+							</button>
+							<div class="dropdown-menu" aria-labelledby="triggerId">
+								<a class="dropdown-item" href="{{ hit['_source']['file']['url'] }}">{{ hit['_source']['file']['filename'] }}</a>
+
+								<button class="dropdown-item disabled" href="#">Other action</button>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+
+		{% endfor %}
+
+
+	</div>
+
+
+{% endblock %}

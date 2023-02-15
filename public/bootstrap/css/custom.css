@@ -62,3 +62,18 @@ h1 {
 .column-div-source:nth-last-child(1) {
     background: none !important;
 }
+
+
+div.fade-out {
+    position: relative;
+}
+
+div.fade-out:after {
+    content: "";
+    height: 90%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+}

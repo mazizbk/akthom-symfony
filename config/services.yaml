@@ -25,12 +25,7 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Controller\Admin\TemplateController:
         autowire: true
-
-    Elastica\Client:
-        $config:
-            host: '127.0.0.1' # ou 127.0.0.1
-            port : '9200'
-
+        
     App\Service\MenuService:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
