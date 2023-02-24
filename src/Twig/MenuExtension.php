@@ -30,7 +30,6 @@ class MenuExtension extends AbstractExtension
     public function renderMenu()
     {
         $menuItems = $this->menuService->getMenuItems();
-
         return $this->twig->render('parts/_menu.html.twig', [
             'menu_items' => $menuItems
         ]);

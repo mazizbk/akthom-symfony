@@ -33,6 +33,7 @@ h1 {
     color: #fff;
     background-color: #3898EC;
     border-color: #3898EC;
+    white-space: nowrap;
 
 }
 

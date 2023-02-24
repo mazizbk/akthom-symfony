@@ -30,6 +30,10 @@ services:
         arguments:
             $entityManager: '@doctrine.orm.entity_manager'
     
+    App\Service\SearchService:
+        arguments:
+            $elasticsearchHost: '%env(ELASTICSEARCH_HOST)%'
+    
     App\Twig\MenuExtension:
         tags:
             - { name: twig.extension }

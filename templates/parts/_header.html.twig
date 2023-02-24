@@ -7,13 +7,11 @@
 					<li>
 						<a href="#" class="nav-link text-white">
 							🇫🇷
-
 						</a>
 					</li>
 					<li>
 						<a href="#" class="nav-link text-white">
 							🇬🇧
-
 						</a>
 					</li>
 
@@ -23,43 +21,61 @@
 	</div>
 	<div class="container">
 
-		<div class="row">
-			<div class="col-10 px-5 py-2 mb-3">
+
+		<nav class="navbar nav-pills navbar-expand-lg">
 
 
-				<nav class="navbar navbar-padding-y-4 nav-pills navbar-expand-lg">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="/accueil">
+					<img src="{{ asset('images/logo.png') }}">
+
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse justify-content-center" id="navbarToggler">
 
 
-					<div class="container-fluid">
-						<a class="navbar-brand px-4" href="/accueil">
-							<img src="{{ asset('images/logo.png') }}">
-
-						</a>
-						<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse px-5" id="navbarTogglerDemo02">
-							<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-								{{ render_menu() }}
-								<li class="nav-item mx-5 mt-0">
-									<a class="btn btn-aktehom-blue btn-md" aria-current="page" href="#">Inscription</a>
-
-								</li>
+					<ul class="navbar-nav justify-content-center" style="white-space: nowrap;">
 
 
-							</ul>
+						{{ render_menu() }}
+
+
+					</ul>
+					<div class="row py-2 mx-5 mt-0">
+
+						<div class="col-12">
+							{% if app.user %}
+
+
+								<a href="#" class="text-dark bi bi-search py-2 mx-2"></a>
+								<a href="#" class="text-dark bi bi-bookmark-heart py-2 mx-2"></a>
+								<a href="#" class="text-dark bi bi-funnel py-2 mx-2"></a>
+								<a href="#" class="text-dark bi bi-bell py-2 mx-2"></a>
+								<a href="#" class="text-dark bi bi-chat py-2 mx-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Contacter un conseiller"></a>
+								<a href="{{path('logout')}}" class="text-danger bi bi-power py-2 mx-2"></a>
+
+
+								<img width="40px" src="https://uploads-ssl.webflow.com/61ef7f445c03bc7854721ad8/620dd6d831044453bc0adf5d_Avatar%2008.png" class="rounded-circle" alt="...">
+							{% else %}
+								<a class="btn btn-primary btn-sm" href="{{path('app_front_login')}}">Se connecter</a>
+
+							{% endif %}
+
 
 						</div>
 
 
 					</div>
-				</nav>
+
+				</div>
 
 
 			</div>
+		</nav>
 
-
-		</div>
 
 	</div>
 

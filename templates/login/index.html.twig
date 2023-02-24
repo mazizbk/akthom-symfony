@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact
+{% endblock %}
+
+{% block body %}
+
+	<div class="col-12 g-5">
+
+
+		<div class="col-6 py-0 container">
+
+			<form action="{{ path('app_front_login') }}" method="post">
+
+
+				<div class="card">
+					<div class="card-header-light text-center ">
+						<h1 class="heading">Login to your account
+
+						</h1>
+					</div>
+					<div class="card-body">
+						{% if error %}
+							<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+
+
+						<div class="mb-3">
+							<label class="form-label">Email address
+
+							</label>
+							<input class="form-control form-control-lg" type="email" id="username" name="_username" value="{{ last_username }}" placeholder="Enter your email"/>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Password</label>
+							<input class="form-control form-control-lg" ttype="password" id="password" name="_password" placeholder="Enter your password"/>
+							<small>
+								<a href="index.html">Forgot password?</a>
+							</small>
+						</div>
+						<div>
+							<label class="form-check">
+								<input class="form-check-input" type="checkbox" value="remember-me" name="remember-me" checked>
+								<span class="form-check-label">
+									Remember me next time
+								</span>
+							</label>
+						</div>
+
+
+					</div>
+					<div class="card-footer bg-transparent text-muted text-center">
+						<button type="submit" class="btn btn-lg btn-primary">Login</button>
+
+					</div>
+				</div>
+			</form>
+
+
+		</div>
+
+
+	</div>
+{% endblock %}

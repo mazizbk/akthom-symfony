@@ -26,27 +26,34 @@
 		<div class="col-lg-6 col-md-8 mx-auto">
 
 
-			<form method="post" action="/result/search">
+			<form method="post" action="{{path('app_result')}}">
 
 
 				<input type="text" class="form-control rounded-pill" id="search_string" name="search_string" value="{{ app.request.get('search_string') }}" placeholder="Veuillez taper un mot clé pour votre recherche. Exemple:  'nettoyage'...">
 
 				<div class="text-center container py-3">
 
-					<input type="checkbox" class="btn-check" id="filter-1" checked autocomplete="off">
+					<input type="checkbox" class="btn-check" id="filter-1" name="filter-1" value="en-GB" autocomplete="off">
 					<label class="btn btn-outline-primary" for="filter-1">Filtre 1</label>
 
-					<input type="checkbox" class="btn-check" id="filter-2" checked autocomplete="off">
+					<input type="checkbox" class="btn-check" id="filter-2" name="filter-2" value="fr-FR" autocomplete="off">
+
 					<label class="btn btn-outline-primary" for="filter-2">Filtre 2</label>
 
-					<input type="checkbox" class="btn-check" id="filter-3" checked autocomplete="off">
+					<input type="checkbox" class="btn-check" id="filter-3" autocomplete="off">
 					<label class="btn btn-outline-primary" for="filter-3">Filtre 3</label>
 
-					<input type="checkbox" class="btn-check" id="filter-4" checked autocomplete="off">
+					<input type="checkbox" class="btn-check" id="filter-4" autocomplete="off">
 					<label class="btn btn-outline-primary" for="filter-4">Filtre 4</label>
 
-					<input type="checkbox" class="btn-check" id="filter-5" checked autocomplete="off">
+					<input type="checkbox" class="btn-check" id="filter-5" autocomplete="off">
 					<label class="btn btn-outline-primary" for="filter-5">Filtre 5</label>
+
+
+					<input type="checkbox" class="btn-check" name="perfect" id="perfect" value="1" autocomplete="off" {{ app.request.get('perfect')=="1" ? 'checked' : '' }}>
+
+
+					<label class="btn btn-outline-warning" for="perfect">Exactement les termes saisis</label>
 
 
 				</div>
@@ -64,6 +71,7 @@
 
 	</div>
 
+
 	<div class="container py-4">
 
 
@@ -71,10 +79,7 @@
 			<center>
 				<h3>{{ res['hits']['total']['value'] }}
 					résultat(s) trouvé(s)
-					<em>"{{ app.request.get('search_string') }}
-
-
-						"
+					<em>"{{ app.request.get('search_string') }}"
 
 					</em>
 				</h3>
@@ -87,13 +92,25 @@
 		{% for hit in res['hits']['hits'] %}
 
 
-			<div class="col-lg-6 col-md-12 col-sm-12 py-4 d-flex align-items-stretch">
-				<div class="card">
+			<div class="col-lg-12 col-md-12 col-sm-12 py-4 d-flex align-items-stretch">
+				<div class="card" style="width: 100%;">
 
 					<div class="card-body">
-						<h5 class="card-title">{{ hit['meta']['title'] ?? 'undefined title'  }}</h5>
+						<h6 class="card-title">
+							<b type="button" data-bs-toggle="modal" data-bs-target="#pdfModalViewer" data-bs-url="../uploads/aktehom_Sample_files/{{ hit['_source']['file']['filename'] }}" data-bs-title="{{ hit['_source']['meta']['title'] ?? 'undefined title' }}">{{ hit['_source']['meta']['title'] ?? 'undefined title'  }}
+
+
+							</b>
+						</h6>
 
 						<p class="card-text" id="{{loop.index}}" name="goodSummary">{{ hit['highlight']['content']|join(' ')| raw}}</p>
+						<p class="card-text align-items-stretch">
+							<b>
+								Creator :</b>
+							{{ hit['_source']['meta']['creator_tool'] ?? 'undefined Creator'  }}
+
+
+						</p>
 
 
 						<p class="card-text align-items-stretch">
@@ -102,7 +119,6 @@
 							to define
 
 						</p>
-
 
 					</div>
 					<div class="card-footer bg-transparent border-light">
@@ -113,7 +129,8 @@
 								Dropdown
 							</button>
 							<div class="dropdown-menu" aria-labelledby="triggerId">
-								<a class="dropdown-item" href="{{ hit['_source']['file']['url'] }}">{{ hit['_source']['file']['filename'] }}</a>
+								<a class="dropdown-item" target="_blank" href="../uploads/aktehom_Sample_files/{{ hit['_source']['file']['filename'] }}">{{ hit['_source']['file']['filename'] }}</a>
+
 
 								<button class="dropdown-item disabled" href="#">Other action</button>
 							</div>
@@ -127,8 +144,62 @@
 
 		{% endfor %}
 
+	</div>
+	<div class="modal fade" id="pdfModalViewer" tabindex="-1" aria-labelledby="pdfModalViewerLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
 
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="pdfModalViewerLabel"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<embed src="" width="100%" height="700" type="application/pdf">
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
+{% endblock %}
+
+
+{% block javascripts %}
+
+	{{ parent() }}
+
+	<script>
+		const pdfModalViewer = document.getElementById( 'pdfModalViewer' );
+pdfModalViewer.addEventListener( 'show.bs.modal', event => {
+
+
+
+
+
+const button = event.relatedTarget
+const title = button.getAttribute( 'data-bs-title' )
+
+const url = button.getAttribute( 'data-bs-url' )
+
+const modalTitle = pdfModalViewer.querySelector( '.modal-title' )
+const modalBodyEmbed = pdfModalViewer.querySelector( '.modal-body embed' )
+
+console.log( modalBodyEmbed )
+
+modalTitle.textContent = title
+
+
+modalBodyEmbed.src = url + '#search=' + document.getElementById( 'search_string' ).value + '&highlight=btm'
+
+
+
+
+
+} )
+	</script>
 {% endblock %}

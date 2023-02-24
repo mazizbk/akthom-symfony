@@ -11,8 +11,10 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
         "elasticsearch/elasticsearch": "^7.17",
+        "fakerphp/faker": "^1.21",
         "friendsofsymfony/ckeditor-bundle": "^2.4",
         "helios-ag/fm-elfinder-bundle": "^12.2",
+        "knplabs/knp-paginator-bundle": "^6.1",
         "league/html-to-markdown": "^5.1",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/asset": "6.2.*",
@@ -85,6 +87,7 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.2.*",
         "symfony/css-selector": "6.2.*",
