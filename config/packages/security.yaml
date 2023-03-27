@@ -9,34 +9,23 @@ security:
             entity:
                 class: App\Entity\User
                 property: email
+      
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        admin:
-            lazy: true
-            pattern: ^/admin
-            provider: app_user_provider
-            form_login:
-                # "app_login" is the name of the route created previously
-                login_path: app_admin_login
-                check_path: app_admin_login
-                default_target_path: app_home_admin
-            logout:
-                path: admin_logout
-                target: app_admin_login
-        front:  
+       
+        main:
             lazy: true
             pattern: ^/
-            provider: app_user_provider
             form_login:
-                # "app_login" is the name of the route created previously
                 login_path: app_front_login
                 check_path: app_front_login
-                default_target_path: app_home
+                
             logout:
                 path: logout
-                target: app_home
+
+           
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
@@ -46,7 +35,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/admin, roles: ROLE_ADMIN }
+        #- { path: ^/admin, roles: ROLE_ADMIN }
+        #- { path: ^/, roles: ROLE_USER }
+
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
