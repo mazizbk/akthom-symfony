@@ -12,8 +12,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LoginController extends AbstractController
 {
-    #[Route('/auth/login', name: 'app_front_login')]
-    public function index(AuthenticationUtils $authenticationUtils): Response
+    #[Route('/login', name: 'app_front_login')]
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
 
 
@@ -26,5 +26,12 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
+    }
+
+    #[Route('/logout', name: 'logout')]
+    public function logout()
+    {
+        // The security layer will intercept this request
+        // and handle the logout automatically
     }
 }

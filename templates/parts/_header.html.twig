@@ -5,12 +5,14 @@
 
 				<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 					<li>
-						<a href="#" class="nav-link text-white">
+						<a href="{{ path('language_switcher', {'lang': 'fr'}) }}" class="nav-link text-white">
+
 							🇫🇷
 						</a>
 					</li>
 					<li>
-						<a href="#" class="nav-link text-white">
+						<a href="{{ path('language_switcher', {'lang': 'en'}) }}" class="nav-link text-white">
+
 							🇬🇧
 						</a>
 					</li>
@@ -60,7 +62,8 @@
 
 								<img width="40px" src="https://uploads-ssl.webflow.com/61ef7f445c03bc7854721ad8/620dd6d831044453bc0adf5d_Avatar%2008.png" class="rounded-circle" alt="...">
 							{% else %}
-								<a class="btn btn-primary btn-sm" href="{{path('app_front_login')}}">Se connecter</a>
+								<a class="btn btn-aktehom-blue btn-sm" href="{{path('app_front_login')}}">Se connecter</a>
+
 
 							{% endif %}
 

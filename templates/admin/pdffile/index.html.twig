@@ -1,0 +1,87 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Page index
+{% endblock %}
+
+{% block body %}
+	<ul class="breadcrumb">
+		<li>Gestion des fichiers pdf</li>
+	</ul>
+	<div class="card">
+
+		<div class="card-body">
+			<h5 class="card-title">
+
+
+				<a class="btn btn-primary " href="{{ path('app_pdf_file_upload') }}" role="button">Ajouter un fichier</a>
+
+
+			</h5>
+			<div class="table-responsive">
+				<table class="table" id="pdf_list">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nom du fichier</th>
+
+
+							<th>Statut</th>
+
+
+							<th>Protégé</th>
+
+
+							<th>Statut Indexation</th>
+
+
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for file in pdfFile %}
+							<tr>
+								<td>{{ file.id }}</td>
+
+
+								<td>{{ file.filename }}</td>
+								<td>{{ file.isStatus ?  '<span class="badge text-bg-success">Actif</span>' : '<span class="badge text-bg-danger">Inactif</span>' }}</td>
+
+
+								<td>{{ file.isProtected ?  '<span class="badge text-bg-danger">Protégé</span>' : '' }}</td>
+
+
+								<td>{{ file.metadata is null ? '<span class="badge text-bg-warning">En cours ...</span>' : '<span class="badge text-bg-success">Indexé</span>'  }}</td>
+
+
+								<td>
+									<div class="btn-group" role="group" aria-label="Basic example">
+										<a class="btn btn-info" href="#" target="_blank" role="button">Visualiser</a>
+										<a class="btn btn-warning" href="{{ path('app_pdf_file_meta', {'id': file.id}) }}" role="button">Métadata</a>
+
+										{{ include('admin/pdffile/_delete_form.html.twig') }}
+
+									</div>
+
+								</td>
+							</tr>
+
+						{% endfor %}
+					</tbody>
+				</table>
+
+			</div>
+
+		</div>
+	</div>
+
+
+{% endblock %}
+{% block javascripts %}
+
+	{{ parent() }}
+	<script>
+		$( '#pdf_list' ).DataTable();
+	</script>
+
+
+{% endblock %}

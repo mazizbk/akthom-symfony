@@ -86,16 +86,19 @@
 			</center>
 		</div>
 	</div>
-	<div class="row mx-5">
+	<div class="row mx-5{{ app.user ? '' : ' fade-out' }}" id="items">
 
 
 		{% for hit in res['hits']['hits'] %}
 
 
-			<div class="col-lg-12 col-md-12 col-sm-12 py-4 d-flex align-items-stretch">
+			<div class="col-lg-12 col-md-12 col-sm-12 py-4 d-flex align-items-stretch item">
+
 				<div class="card" style="width: 100%;">
 
-					<div class="card-body">
+
+					<div class="card-body overflow-hidden">
+
 						<h6 class="card-title">
 							<b type="button" data-bs-toggle="modal" data-bs-target="#pdfModalViewer" data-bs-url="../uploads/aktehom_Sample_files/{{ hit['_source']['file']['filename'] }}" data-bs-title="{{ hit['_source']['meta']['title'] ?? 'undefined title' }}">{{ hit['_source']['meta']['title'] ?? 'undefined title'  }}
 
@@ -143,7 +146,12 @@
 
 
 		{% endfor %}
+		<nav aria-label="Page navigation example">
 
+
+			<ul class="pagination" id="pagination"></ul>
+
+		</nav>
 	</div>
 	<div class="modal fade" id="pdfModalViewer" tabindex="-1" aria-labelledby="pdfModalViewerLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -165,6 +173,21 @@
 		</div>
 	</div>
 
+	{% if app.user is null %}
+		<div class="fixed-bottom d-flex justify-content-center">
+			<div class="floating-div py-4 px-4">
+				<p>Pour accéder à ce contenu, vous devez vous inscrire.</p>
+				<p class="text-center">
+					<a href="{{path('app_front_login')}}" class="btn btn-aktehom-blue my-2">Se connecter</a>
+
+
+				</p>
+			</div>
+
+		</div>
+
+	{% endif %}
+
 
 {% endblock %}
 
@@ -174,7 +197,11 @@
 	{{ parent() }}
 
 	<script>
-		const pdfModalViewer = document.getElementById( 'pdfModalViewer' );
+		let pdfModalViewer = document.getElementById( 'pdfModalViewer' )
+
+var ModalViewer = new bootstrap.Modal( pdfModalViewer )
+
+
 pdfModalViewer.addEventListener( 'show.bs.modal', event => {
 
 
@@ -201,5 +228,22 @@ modalBodyEmbed.src = url + '#search=' + document.getElementById( 'search_string'
 
 
 } )
+
+pdfModalViewer.addEventListener( 'hidden.bs.modal', function ( event ) {
+
+
+
+
+
+const modalTitle = pdfModalViewer.querySelector( '.modal-title' )
+const modalBodyEmbed = pdfModalViewer.querySelector( '.modal-body embed' )
+modalTitle.textContent = "";
+modalBodyEmbed.src = "";
+
+
+
+
+
+} );
 	</script>
 {% endblock %}

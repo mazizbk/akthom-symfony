@@ -6,8 +6,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Knp\Component\Pager\PaginatorInterface;
-use App\Service\SearchService;
+use App\Service\ElasticService;
 
 
 
@@ -17,11 +16,11 @@ use App\Service\SearchService;
 class ResultController extends AbstractController
 {
     #[Route('/search', methods: ['GET', 'POST', 'HEAD'], name: 'app_result')]
-    public function search(Request $request, PaginatorInterface $paginator, SearchService $searchService): Response
+    public function search(Request $request, ElasticService $elasticService): Response
     {
         $searchString = $request->query->get('search_string') ?? $request->request->get('search_string');
         $isPerfect = $request->query->get('perfect') ?? $request->request->get('perfect');
-        $results = $searchService->search('pdf_aktehom', $searchString, $isPerfect ? true : false);
+        $results = $elasticService->search('pdf_aktehom', $searchString, $isPerfect ? true : false);
         return $this->render('result/index.html.twig', [
             'res' => $results
         ]);

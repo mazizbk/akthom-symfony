@@ -1,12 +1,12 @@
 <?php
-// src/Service/SearchService.php
+// src/Service/ElasticService.php
 
 namespace App\Service;
 
 use Elasticsearch\ClientBuilder;
 use Elasticsearch\Client;
 
-class SearchService
+class ElasticService
 {
     private Client $client;
 
@@ -90,5 +90,83 @@ class SearchService
         }
 
         return $clauses;
+    }
+
+    public function getMetaByFileName(string $index, string $fileName)
+    {
+
+        $params = [
+            'index' => $index,
+            'body' => [
+                "query" => [
+                    "match" => [
+                        "file.filename" => $fileName
+                    ]
+                ],
+                '_source' => [
+                    "includes" => ['meta']
+                ]
+            ],
+
+
+        ];
+
+        $results = $this->client->search($params);
+
+
+
+        return isset($results['hits']['hits'][0]) ? $results['hits']['hits'][0]['_source']['meta'] : null;
+    }
+    public function getIdByFileName($filename)
+    {
+
+
+        // Search for document ID
+        $params = [
+            'index' => 'pdf_aktehom',
+            'body' => [
+                'query' => [
+                    'match' => [
+                        'file.filename' => $filename,
+                    ],
+                ],
+            ],
+        ];
+
+        $response = $this->client->search($params);
+        // Update document with new metadata
+        return isset($response['hits']['hits'][0]) ? $response['hits']['hits'][0]['_id'] : null;
+    }
+    public function updateMetadata($filename, $metadata)
+    {
+
+        $id = $this->getIdByFileName($filename);
+        if (!\is_null($id)) {
+            $metadata = \json_decode($metadata, \true);
+            $params = [
+                'index' => 'pdf_aktehom',
+                'id' => $id,
+                'body' => [
+                    'doc' => [
+                        'meta' => $metadata
+                    ]
+                ]
+            ];
+            $this->client->update($params);
+        }
+    }
+
+
+    public function deleteByFileName($filename)
+    {
+        $id = $this->getIdByFileName($filename);
+        if (!\is_null($id)) {
+            $params = [
+                'index' => 'pdf_aktehom',
+                'id' => $id
+            ];
+
+            $this->client->delete($params);
+        }
     }
 }

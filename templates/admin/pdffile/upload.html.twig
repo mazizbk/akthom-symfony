@@ -1,0 +1,40 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Nouveau Fichier Pdf
+{% endblock %}
+
+{% block body %}
+
+	<ul class="breadcrumb">
+		<li>
+			<a href="{{ path('app_pdf_file_index') }}">Gestion des fichiers Pdf</a>
+
+		</li>
+		<li>Charger un nouveau fichier</li>
+	</ul>
+
+
+	<div class="card">
+
+		<div class="card-body">
+			<h4 class="card-title">Charger un nouveau fichier</h4>
+			{% for flashMessage in app.flashes('error') %}
+				<div class="alert alert-danger" role="alert">
+
+					<strong style="color:red">
+						{{ flashMessage }}
+
+					</strong>
+				</div>
+
+			{% endfor %}
+
+
+			{{ form_start(form) }}
+			{{ form_widget(form) }}
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+
+{% endblock %}

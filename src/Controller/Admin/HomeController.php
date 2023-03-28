@@ -9,10 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/admin', name: 'app_home_admin')]
-    public function index(): Response
+    public function home(): Response
     {
         return $this->render('admin/home/index.html.twig', [
-                    'controller_name' => 'HomeAdminController',
-                ]);
+            'controller_name' => 'HomeAdminController',
+        ]);
     }
 }
